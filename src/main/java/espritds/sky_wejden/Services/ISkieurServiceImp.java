@@ -8,6 +8,7 @@ import espritds.sky_wejden.Repositories.PisteRepository;
 import espritds.sky_wejden.Repositories.SkieurRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.util.Assert;
 
 import java.util.List;
 
@@ -58,6 +59,32 @@ public class ISkieurServiceImp implements ISkieurService {
 
     @Override
     public Skieur assignSkierToPiste(Long numSkieur, Long numPiste) {
+
+            Skieur skieur = skieurRepository.findById(numSkieur).orElse(null);
+            Assert.notNull(skieur, "skieur not found");
+            Piste piste = pisteRepository.findById(numPiste).orElse(null);
+            Assert.notNull(piste, "piste not found");
+
+           //  if(skieur != null && piste != null )
+
+                skieur.getPistes().add(piste);
+           /*List<Piste> pistes = skieur.getPistes();
+           pistes.add(piste);
+           skieur.setPistes(pistes);*/
+               return skieurRepository.save(skieur);
+
+           // return  null;
+        }
+
+    @Override
+    public Skieur AssignSkierToSubscription(long numSkieur, long numAbon) {
+        return null;
+    }
+
+
+  /*
+    @Override
+    public Skieur assignSkierToPiste(Long numSkieur, Long numPiste) {
         //recuperation des objets
 
         Skieur skieur = skieurRepository.findById(numSkieur).orElse(null);
@@ -76,6 +103,8 @@ public class ISkieurServiceImp implements ISkieurService {
 
              */
 
+
+    /*
             //save
             return skieurRepository.save(skieur);
 
@@ -85,27 +114,31 @@ public class ISkieurServiceImp implements ISkieurService {
     }
 
 
+
+
+
     @Override
-    public Skieur AssignSkierToSubscription(long numSkieur, long numAbonnement) {
-
-        Skieur skieur = skieurRepository.findById(numSkieur).orElse(null);
-        Abonnement abonnement = abonnementRepository.findById(numAbonnement).orElse(null);
-
-        if (skieur != null && abonnement != null) {
+    public Skieur AssignSkierToSubscription(long numSkieur, long numAbon) {
+        //RECUPERATION ID
+        Skieur skieur=skieurRepository.findById(numSkieur).orElse(null) ;
+        Abonnement abonnement=abonnementRepository.findById(numAbon).orElse(null);
+//verrificationnon null
+        if(skieur!=null && abonnement!=null){
+//traitement
+            // skieur.getPistes().add(piste);
 
             skieur.setAbonnement(abonnement);
-            return skieurRepository.save(skieur);
 
+            return  skieurRepository.save(skieur);
 
         }
+        return null;}
 
 
-        return null;
 
 
-    }
 
-
+     */
 
 
 

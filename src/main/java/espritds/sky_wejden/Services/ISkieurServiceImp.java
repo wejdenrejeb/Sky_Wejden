@@ -3,6 +3,7 @@ import espritds.sky_wejden.Entiries.Abonnement;
 import espritds.sky_wejden.Entiries.Piste;
 import espritds.sky_wejden.Entiries.Skieur;
 
+import espritds.sky_wejden.Entiries.TypeAbonnement;
 import espritds.sky_wejden.Repositories.AbonnementRepository;
 import espritds.sky_wejden.Repositories.PisteRepository;
 import espritds.sky_wejden.Repositories.SkieurRepository;
@@ -10,6 +11,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.util.Assert;
 
+import java.util.Collection;
+import java.util.Collections;
 import java.util.List;
 
 
@@ -25,6 +28,7 @@ public class ISkieurServiceImp implements ISkieurService {
 
     @Autowired
     AbonnementRepository abonnementRepository;
+
 
 
     @Override
@@ -78,8 +82,32 @@ public class ISkieurServiceImp implements ISkieurService {
 
     @Override
     public Skieur AssignSkierToSubscription(long numSkieur, long numAbon) {
-        return null;
+        {
+            //RECUPERATION ID
+            Skieur skieur=skieurRepository.findById(numSkieur).orElse(null) ;
+            Abonnement abonnement=abonnementRepository.findById(numAbon).orElse(null);
+            Assert.notNull(abonnement,"abonnement n existe pas ");
+            //verrificationnon null
+            //if(skieur!=null && abonnement!=null){
+            //traitement
+            // skieur.getPistes().add(piste);
+            skieur.setAbonnement(abonnement);
+            return  skieurRepository.save(skieur);
+            //}
+            //return null;
+        }
     }
+
+    @Override
+    public List<Skieur> retrieveSkiersBySubscriptionType(TypeAbonnement typeAbonnement) {
+
+            return skieurRepository.findByAbonnementTypeAbon(typeAbonnement);
+
+
+            //tant que j ai besoin d une liste de skieur donc repo de skieur
+    }
+
+
 
 
   /*

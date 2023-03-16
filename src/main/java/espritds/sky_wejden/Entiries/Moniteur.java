@@ -23,10 +23,6 @@ public class Moniteur {
     private String prenomM;
     private LocalDate dateRecru;
 
-
-    @ManyToOne
-    private Cours cour;
-
     @OneToMany
     private List<Cours> cours;
 }

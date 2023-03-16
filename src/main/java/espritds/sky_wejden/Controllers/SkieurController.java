@@ -2,6 +2,7 @@ package espritds.sky_wejden.Controllers;
 
 
 import espritds.sky_wejden.Entiries.Skieur;
+import espritds.sky_wejden.Entiries.TypeAbonnement;
 import espritds.sky_wejden.Services.ISkieurService;
 import espritds.sky_wejden.Services.ISkieurServiceImp;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -52,7 +53,14 @@ public class SkieurController {
         return iSkieurService.assignSkierToPiste(numSkieur,numPiste);
     }
 
-    /*
+
+    @GetMapping ("/retrieveSkiersBySubscriptionType/{type}")
+    public List<Skieur> retrieveSkiersBySubscriptionType (@PathVariable TypeAbonnement typeAbonnement){
+        return iSkieurService.retrieveSkiersBySubscriptionType(typeAbonnement);
+    }
+
+
+
     @PutMapping("{numSkieur}/{numAbon}")
 
     public Skieur AssignSkierToSubscription(@PathVariable long numSkieur, @PathVariable long numAbon) {

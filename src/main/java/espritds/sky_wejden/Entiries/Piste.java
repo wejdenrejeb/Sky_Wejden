@@ -21,7 +21,7 @@ public class Piste {
 
     private String nomPiste;
 
-    private Couleur Couleur;
+    private Couleur couleur;
 
     private Integer longeur;
 

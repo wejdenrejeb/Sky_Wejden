@@ -1,7 +1,6 @@
 package espritds.sky_wejden.Services;
 
-import espritds.sky_wejden.Entiries.Skieur;
-import espritds.sky_wejden.Entiries.TypeAbonnement;
+import espritds.sky_wejden.Entiries.*;
 
 import java.util.List;
 
@@ -21,6 +20,7 @@ public interface ISkieurService {
 
     List<Skieur> retrieveSkiersBySubscriptionType(TypeAbonnement typeAbonnement);
 
+    List<Skieur> findByInscriptionsCourTypeCoursAndInscriptionsCourSupportAndPistesCouleur(TypeCours inscriptions_cour_typeCours, Support inscriptions_cour_support, Couleur pistes_couleur);
 
 
 

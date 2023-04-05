@@ -10,7 +10,6 @@ import java.util.Set;
 
 public interface AbonnementRepository extends JpaRepository<Abonnement,Long> {
 
-   // List<Abonnement> findByTypeAbon (TypeAbonnement typeAbonnement);
 
     Set<Abonnement> findByTypeAbon (TypeAbonnement type);
 

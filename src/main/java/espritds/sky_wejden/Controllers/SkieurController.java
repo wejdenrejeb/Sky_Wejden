@@ -1,8 +1,7 @@
 package espritds.sky_wejden.Controllers;
 
 
-import espritds.sky_wejden.Entiries.Skieur;
-import espritds.sky_wejden.Entiries.TypeAbonnement;
+import espritds.sky_wejden.Entiries.*;
 import espritds.sky_wejden.Services.ISkieurService;
 import espritds.sky_wejden.Services.ISkieurServiceImp;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -67,6 +66,16 @@ public class SkieurController {
 
         return iSkieurService.AssignSkierToSubscription(numSkieur, numAbon);
     }
+
+
+    @GetMapping("testt")
+    public List<Skieur> findByInscriptionsCourTypeCoursAndInscriptionsCourSupportAndPistesCouleur(@ PathVariable TypeCours inscriptions_cour_typeCours, Support inscriptions_cour_support, Couleur pistes_couleur) {
+        return iSkieurService.findByInscriptionsCourTypeCoursAndInscriptionsCourSupportAndPistesCouleur(inscriptions_cour_typeCours,inscriptions_cour_support,pistes_couleur);
+    }
+
+
+
+
 
    /*
     @PutMapping("{numSkieur}/{numInscription}")

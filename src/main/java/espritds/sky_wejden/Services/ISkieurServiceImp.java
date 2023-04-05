@@ -1,12 +1,10 @@
 package espritds.sky_wejden.Services;
-import espritds.sky_wejden.Entiries.Abonnement;
-import espritds.sky_wejden.Entiries.Piste;
-import espritds.sky_wejden.Entiries.Skieur;
+import espritds.sky_wejden.Entiries.*;
 
-import espritds.sky_wejden.Entiries.TypeAbonnement;
 import espritds.sky_wejden.Repositories.AbonnementRepository;
 import espritds.sky_wejden.Repositories.PisteRepository;
 import espritds.sky_wejden.Repositories.SkieurRepository;
+import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.util.Assert;
@@ -17,17 +15,18 @@ import java.util.List;
 
 
 @Service
+@RequiredArgsConstructor
 public class ISkieurServiceImp implements ISkieurService {
 
 
-    @Autowired
-    SkieurRepository skieurRepository;
 
-    @Autowired
-    PisteRepository pisteRepository;
+    private final SkieurRepository skieurRepository;
 
-    @Autowired
-    AbonnementRepository abonnementRepository;
+
+    private final PisteRepository pisteRepository;
+
+
+    private final AbonnementRepository abonnementRepository;
 
 
 
@@ -106,6 +105,28 @@ public class ISkieurServiceImp implements ISkieurService {
 
             //tant que j ai besoin d une liste de skieur donc repo de skieur
     }
+
+
+
+
+
+
+    @Override
+    public List<Skieur> findByInscriptionsCourTypeCoursAndInscriptionsCourSupportAndPistesCouleur(TypeCours inscriptions_cour_typeCours, Support inscriptions_cour_support, Couleur pistes_couleur) {
+        return skieurRepository.findByInscriptionsCourTypeCoursAndInscriptionsCourSupportAndPistesCouleur(inscriptions_cour_typeCours,inscriptions_cour_support,pistes_couleur);
+    }
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 

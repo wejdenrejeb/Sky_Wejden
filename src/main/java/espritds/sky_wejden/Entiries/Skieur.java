@@ -30,7 +30,7 @@ public class Skieur {
     private String ville;
 
     @OneToMany(mappedBy="skieur")
-    private List<Inscription> Inscriptions;
+    private List<Inscription> inscriptions;
 
     @ManyToMany
     @JsonIgnore

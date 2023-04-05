@@ -25,7 +25,7 @@ public class Cours {
     private int creneau;
 
     @OneToMany(mappedBy = "cour",cascade = CascadeType.REMOVE)
-    private List<Inscription> Inscriptions;
+    private List<Inscription> inscriptions;
 
 
     //@OneToMany(mappedBy="cour")

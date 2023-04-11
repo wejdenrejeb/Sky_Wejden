@@ -22,6 +22,7 @@ public interface ISkieurService {
 
     List<Skieur> findByInscriptionsCourTypeCoursAndInscriptionsCourSupportAndPistesCouleur(TypeCours inscriptions_cour_typeCours, Support inscriptions_cour_support, Couleur pistes_couleur);
 
+   Skieur addSkierAndAssignToCourse(Skieur skieur);
 
 
 

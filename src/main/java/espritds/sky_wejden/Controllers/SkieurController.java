@@ -96,5 +96,9 @@ public class SkieurController {
     //@RequestBody cad tel9ah el body mte3 el req kima queryparam
 
 
+    @PostMapping("addSkierAndAssignToCourse")
+    Skieur addSkierAndAssignToCourse(@RequestBody Skieur skieur) {
+        return iSkieurService.addSkierAndAssignToCourse(skieur);
 
+    }
 }

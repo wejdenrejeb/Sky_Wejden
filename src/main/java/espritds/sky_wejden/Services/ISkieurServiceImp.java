@@ -1,9 +1,7 @@
 package espritds.sky_wejden.Services;
 import espritds.sky_wejden.Entiries.*;
 
-import espritds.sky_wejden.Repositories.AbonnementRepository;
-import espritds.sky_wejden.Repositories.PisteRepository;
-import espritds.sky_wejden.Repositories.SkieurRepository;
+import espritds.sky_wejden.Repositories.*;
 import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -25,9 +23,10 @@ public class ISkieurServiceImp implements ISkieurService {
 
     private final PisteRepository pisteRepository;
 
+    private final InscriptionRepository inscriptionRepository;
 
     private final AbonnementRepository abonnementRepository;
-
+    private final CoursRespository coursRespository;
 
 
     @Override
@@ -114,6 +113,29 @@ public class ISkieurServiceImp implements ISkieurService {
     @Override
     public List<Skieur> findByInscriptionsCourTypeCoursAndInscriptionsCourSupportAndPistesCouleur(TypeCours inscriptions_cour_typeCours, Support inscriptions_cour_support, Couleur pistes_couleur) {
         return skieurRepository.findByInscriptionsCourTypeCoursAndInscriptionsCourSupportAndPistesCouleur(inscriptions_cour_typeCours,inscriptions_cour_support,pistes_couleur);
+    }
+
+    @Override
+    public Skieur addSkierAndAssignToCourse(Skieur skieur) {
+        Assert.notNull(skieur.getAbonnement(),"abn not must be empty"); //nthabtou mawjoudin walle
+        Assert.notNull(skieur.getInscriptions(),"inscriptions must not be empty");
+
+        List<Inscription> inscriptions = skieur.getInscriptions();
+
+        inscriptions.forEach(inscription -> {
+            Assert.notNull(inscription.getCour().getNumCours(),"Cours must be entered!!");// nthabtou w baad on va recuperer le cour
+            Cours cour= coursRespository.findById(inscription.getCour().getNumCours()).orElse(null);
+            Assert.notNull(cour,"no cours found with this id!");
+            inscription.setCour(cour);
+            skieurRepository.saveAndFlush(skieur); // save objet skieur et flash jointure fi wostou donc ywali houwa manager entity
+
+            inscription.setSkieur(skieur);
+            inscriptionRepository.save(inscription);
+            //exeption handler
+        });
+
+
+        return skieur;
     }
 
 

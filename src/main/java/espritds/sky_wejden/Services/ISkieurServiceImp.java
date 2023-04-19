@@ -127,12 +127,25 @@ public class ISkieurServiceImp implements ISkieurService {
             Cours cour= coursRespository.findById(inscription.getCour().getNumCours()).orElse(null);
             Assert.notNull(cour,"no cours found with this id!");
             inscription.setCour(cour);
-            skieurRepository.saveAndFlush(skieur); // save objet skieur et flash jointure fi wostou donc ywali houwa manager entity
+            //skieurRepository.saveAndFlush(skieur); // save objet skieur et flash jointure fi wostou donc ywali houwa manager entity
 
-            inscription.setSkieur(skieur);
-            inscriptionRepository.save(inscription);
+            // inscription.setSkieur(skieur);
+            //inscriptionRepository.save(inscription);
+
+
             //exeption handler
         });
+
+        skieurRepository.save(skieur);
+        skieur.getInscriptions().forEach(inscription -> {
+            inscription.setSkieur(skieur);
+            inscriptionRepository.save(inscription);
+        });
+
+
+        //autrement najmou naadiw liste fel url bch ynajm yaffecti plusieurs cours:
+
+
 
 
         return skieur;

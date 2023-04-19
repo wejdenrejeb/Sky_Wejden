@@ -1,5 +1,6 @@
 package espritds.sky_wejden.Entiries;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -24,6 +25,7 @@ public class Cours {
     private Float prix;
     private int creneau;
 
+    @JsonIgnore
     @OneToMany(mappedBy = "cour",cascade = CascadeType.REMOVE)
     private List<Inscription> inscriptions;
 

@@ -14,4 +14,6 @@ public interface ICoursService {
 
     void removeCours (Long numCours);
     Cours retrieveCours (Long numCours);
+
+    public void testScheduler();
 }
